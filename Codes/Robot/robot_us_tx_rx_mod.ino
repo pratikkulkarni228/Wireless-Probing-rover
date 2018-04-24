@@ -17,11 +17,11 @@ int Val;
 
 void setup()
 {
-    Serial.begin(9600);	// Debugging only
+    Serial.begin(9600);	// Baud rate
     Serial.println("setup");
 
     // Initialise the IO and ISR
-    vw_set_ptt_inverted(true); // Required for DR3100
+    vw_set_ptt_inverted(true); 
     vw_setup(2000);	 // Bits per sec
     vw_set_rx_pin(2);
     vw_rx_start();       // Start the receiver PLL running
@@ -111,10 +111,10 @@ void loop()
     //-----------------Ultrasonic sensor---------------------------
     long duration, distance;
 
-    digitalWrite(trigPin, LOW);  // Added this line
-    delayMicroseconds(2); // Added this line
+    digitalWrite(trigPin, LOW);  
+    delayMicroseconds(2); 
     digitalWrite(trigPin, HIGH);
-    delayMicroseconds(10); // Added this line
+    delayMicroseconds(10); 
     digitalWrite(trigPin, LOW);
     duration = pulseIn(echoPin, HIGH);
     distance = (duration/2) / 29.1;

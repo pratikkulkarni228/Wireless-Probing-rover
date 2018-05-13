@@ -18,7 +18,6 @@ int Val;
 void setup()
 {
     Serial.begin(9600);	// Baud rate
-    Serial.println("setup");
 
     // Initialise the IO and ISR
     vw_set_ptt_inverted(true); 
@@ -47,25 +46,16 @@ void loop()
 
         digitalWrite(13, true); // Flash a light to show received good message
       	
-      	Serial.print("Got: ");
       	for (i = 0; i < buflen; i++)
       	{
       	    Serial.print(buf[i], HEX);
-        // Remove the print statements after testing
             if (isDigit(c=(char)(*(buf+i))))
               str = c;
       
             Val =str.toInt();
-//            Serial.println("below is");
-//            Serial.println("goo: ");
-//            Serial.print(Val);
-            
-      	}//end of for
-//       Serial.println("goo2: ");
-//        Serial.println(Val);    // Remove AT
+
         if(Val == 1)
         {
-            Serial.println("rt");
         digitalWrite(motor_1_a,HIGH);
         digitalWrite(motor_1_b,LOW);
         digitalWrite(motor_2_a,LOW);
@@ -74,7 +64,6 @@ void loop()
         }//end of if1
         if(Val == 2)
         {
-            Serial.println("lt");
         digitalWrite(motor_1_a,LOW);
         digitalWrite(motor_1_b,HIGH);
         digitalWrite(motor_2_a,HIGH);
@@ -83,7 +72,6 @@ void loop()
         }//end of if2
         if(Val == 3)
         {
-            Serial.println("bk");
         digitalWrite(motor_1_a,LOW);
         digitalWrite(motor_1_b,HIGH);
         digitalWrite(motor_2_a,LOW);
@@ -92,7 +80,6 @@ void loop()
         }//end of if3
         if(Val == 4)
         {
-            Serial.println("fr");
         digitalWrite(motor_1_a,HIGH);
         digitalWrite(motor_1_b,LOW);
         digitalWrite(motor_2_a,HIGH);
@@ -105,7 +92,6 @@ void loop()
         digitalWrite(motor_2_a,LOW);
         digitalWrite(motor_2_b,LOW);    
       
-	      Serial.println("");
         digitalWrite(13, false);
 }//end of if - message recieved
     //-----------------Ultrasonic sensor---------------------------
@@ -125,8 +111,6 @@ void loop()
     }
     else 
     {
-      Serial.print(distance);
-      Serial.println(" cm");
         itoa(distance,distarr,10);
         vw_send((uint8_t *)distarr,strlen(distarr));
         vw_wait_tx();

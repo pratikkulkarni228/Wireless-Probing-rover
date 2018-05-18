@@ -1,13 +1,13 @@
-
 import processing.serial.*; // imports library for serial communication
 import java.awt.event.KeyEvent; // imports library for reading the data from the serial port
 import java.io.IOException;
 Serial myPort; // defines Object Serial
-// defubes variables
+// defines variables
 String angle="";
 String distance="";
 String data="";
 String noObject;
+String serial_port="COM3" // port to which arduino is connected
 float pixsDistance;
 int iAngle, iDistance;
 int index1=0;
@@ -17,14 +17,13 @@ void setup() {
   
  size (1080, 760); // ***CHANGE THIS TO YOUR SCREEN RESOLUTION***
  smooth();
- myPort = new Serial(this,"COM3", 9600); // starts the serial communication
- myPort.bufferUntil('.'); // reads the data from the serial port up to the character '.'. So actually it reads this: angle,distance.
+ myPort = new Serial(this,serial_port, 9600); // starts the serial communication
+ myPort.bufferUntil('.'); // reads the data from the serial port up to the character '.'// So actually it reads this: angle,distance.
 // orcFont = loadFont("OCRAExtended-30.vlw");
 }
 void draw() {
   
   fill(98,245,61);
-  //textFont(orcFont);
   // simulating motion blur and slow fade of the moving line
   noStroke();
   fill(0,4); 
